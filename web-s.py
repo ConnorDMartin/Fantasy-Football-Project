@@ -139,8 +139,7 @@ def scrape_webpage_year(year, repetitions):
         if i!=0:
             titles = element.find_all("th")
             for title in titles:
-                if title.text != "Game":
-                    title_row.append(title.text)
+                title_row.append(title.text)
         i+=1
 
 
@@ -166,16 +165,16 @@ def scrape_webpage_year(year, repetitions):
         for game in game_elements:
             player_row.append(game.text)
         '''
-
         i=0
         stat_elements = element.find_all("td")
         for stat in stat_elements:
-            if i>1:
+            if i>0:
                 player_row.append(stat.text)
             i+=1
         player_rows.append(player_row)
 
-
+    print(title_row)
+    print(player_rows)
     #open csv file
     csv_file_address="overall-"+str(year)+'-stats.csv'
     with open(csv_file_address, 'w', newline='') as f:
@@ -210,7 +209,6 @@ if decision=="s" or decision=="S":
     while year <=22:
         rep = scrape_webpage_year(year, rep)
         year+=1
-        week=1
 elif decision=="w" or decision=="W":
     week=1
     rep=0
